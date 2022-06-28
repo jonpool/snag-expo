@@ -2,8 +2,6 @@ import React, { createContext, useState, useEffect } from "react";
 import {View, ActivityIndicator} from 'react-native';
 import *  as auth from '../services/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-
 import selectMapPosition from '../pages/CreateProduct/SelectMapPosition';
 
 interface AuthContextData {
