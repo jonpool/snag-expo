@@ -21,25 +21,41 @@ export default function SignUp(){
   
   const [e, setEmail] = useState("");
   const [pw, setPw] = useState("");
+  const [cfPw, setCfPw] = useState("");
+
   var email = e.toLowerCase();
   console.log(user.email);
   user.password= pw;
 
   async function createUser(){
 
-    const data = {
-      email,
-      password:pw,
-    };
-    const response = await api.post('/auth/register',data).catch(error =>{
-      console.log(error.response.data.error);
-  });
-    alert('Cadastro Concluido Com Sucesso'); 
-    navigation.navigate('Login'); 
+    
+      const data = {
+        email,
+        password:pw,
+      };
+      const response = await api.post('/auth/register',data).catch(error =>{
+        console.log(error.response.data.error);
+    });
+      alert('Cadastro Concluido Com Sucesso'); 
+      navigation.navigate('Login'); 
+    
+    
 
   }
-
   
+  async function validatePw(){
+    if (pw !== '' && cfPw !== '') {
+       if (pw != cfPw) {
+          alert('The passwords that you provided does not match!');
+          
+        }
+        else
+          createUser()
+      }
+      else
+      alert('The field Password or password confirmation can`t be blank!');
+  }
 
   
 
@@ -69,11 +85,11 @@ export default function SignUp(){
                 style={styles.inputText}
                 placeholder="Confirm password..." 
                 placeholderTextColor="#ffffff"
-                value={pw}
-                onChangeText={setPw}/>
+                value={cfPw}
+                onChangeText={setCfPw}/>
             </View>
             <TouchableOpacity style={styles.loginBtn}>
-              <Text style={styles.loginText} onPress={()=>{createUser()}}>SignUP</Text>
+              <Text style={styles.loginText} onPress={()=>{validatePw()}}>SignUP</Text>
             </TouchableOpacity>
             
     
